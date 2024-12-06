@@ -1,9 +1,9 @@
 /* BEGIN Header */
 /**
  ******************************************************************************
- * \file            eeprom.h
+ * \file            eeprom_data.h
  * \author          Andrea Vivani
- * \brief           STM32 EEPROM emulation driver
+ * \brief           Configuration parameters of different STM32 families
  ******************************************************************************
  * \copyright
  *
@@ -32,8 +32,8 @@
 /* END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __EEPROM_H__
-#define __EEPROM_H__
+#ifndef __NAME_H__
+#define __NAME_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -41,50 +41,59 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 
 #include <stdint.h>
-#include "eepromConfig.h"
-#include "main.h"
 
 /* Macros --------------------------------------------------------------------*/
+#define EEPROM_ERASE_PAGE_ADDRESS  0
+#define EEPROM_ERASE_PAGE_NUMBER   1
+#define EEPROM_ERASE_SECTOR_NUMBER 2
 
-/* Typedefs ------------------------------------------------------------------*/
-/*
-* EEPROM return status
-*/
-typedef enum { EEPROM_SUCCESS = 0, EEPROM_ERROR = 1, EEPROM_PAGE_FULL = 2, EEPROM_NO_VALID_PAGE = 3 } EEPROM_retStatus_t;
+#if defined(STM32F0)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_ADDRESS
+#elif defined(STM32F1)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_ADDRESS
+#elif defined(STM32F2)
+#define EEPROM_ERASE EEPROM_ERASE_SECTOR_NUMBER
+#elif defined(STM32F3)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_ADDRESS
+#elif defined(STM32F4)
+#define EEPROM_ERASE EEPROM_ERASE_SECTOR_NUMBER
+#elif defined(STM32F7)
+#define EEPROM_ERASE EEPROM_ERASE_SECTOR_NUMBER
+#elif defined(STM32H5)
+#define EEPROM_ERASE EEPROM_ERASE_SECTOR_NUMBER
+#elif defined(STM32H7)
+#define EEPROM_ERASE EEPROM_ERASE_SECTOR_NUMBER
+#elif defined(STM32G0)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
+#elif defined(STM32G4)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
+#elif defined(STM32U0)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
+#elif defined(STM32U5)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
+#elif defined(STM32L0)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
+#elif defined(STM32L1)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
+#elif defined(STM32L4)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
+#elif defined(STM32L5)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
+#elif defined(STM32WB)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
+#elif defined(STM32WBA)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
+#undef FLASH_BANK_1
+#elif defined(STM32WL)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
+#elif defined(STM32C0)
+#define EEPROM_ERASE EEPROM_ERASE_PAGE_NUMBER
 
-/* Function prototypes -------------------------------------------------------*/
-
-/**
- * \brief           Initialize EEPROM emulation
- *
- * \param[in]       varID: pointer to array containing virtual addresses of data to be stored
- *
- * \return          EEPROM_SUCCESS if initialization is succesful, EEPROM_ERROR otherwise
- */
-EEPROM_retStatus_t EEPROM_Init(uint16_t* varID, uint16_t* varData);
-
-/**
- * \brief           Read variable from EEPROM emulation
- *
- * \param[in]       address: virtual address of data to be read
- * \param[in]       value: pointer to output value
- *
- * \return          EEPROM_SUCCESS if read was succesful, EEPROM_NO_VALID_PAGE if no valid page was found, EEPROM_ERROR otherwise
- */
-EEPROM_retStatus_t EEPROM_ReadVariable(uint16_t virtAddress, uint16_t* value);
-
-/**
- * \brief           Write variable to EEPROM emulation
- *
- * \param[in]       virtAddress: virtual address of data to be written
- * \param[in]       value: value to be written
- *
- * \return          EEPROM_SUCCESS if write was succesful, EEPROM_NO_VALID_PAGE if no valid page was found, EEPROM_ERROR otherwise
- */
-EEPROM_retStatus_t EEPROM_WriteVariable(uint16_t virtAddress, uint16_t value);
-
+#ifndef EEPROM_ERASE
+#error "Not Supported MCU!"
+#endif
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __EEPROM_H__ */
+#endif /* __NAME_H__ */
