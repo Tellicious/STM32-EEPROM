@@ -35,7 +35,7 @@
 
 #include "eeprom.h"
 #include "eeprom_STM32.h"
-
+//TODO add icache control
 /* Macros --------------------------------------------------------------------*/
 
 #if !defined(PAGE0_ADDRESS) || !defined(PAGE0_NUM) || !defined(PAGE_SIZE) || !defined(EEPROM_VAR_NUM)
