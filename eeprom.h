@@ -57,17 +57,17 @@ typedef enum { EEPROM_SUCCESS = 0, EEPROM_ERROR = 1, EEPROM_PAGE_FULL = 2, EEPRO
 /**
  * \brief           Initialize EEPROM emulation
  *
- * \return          EEPROM_SUCCESS if initialization is succesful, EEPROM_ERROR otherwise
+ * \return          EEPROM_SUCCESS if initialization is successful, EEPROM_ERROR otherwise
  */
 EEPROM_retStatus_t EEPROM_Init(void);
 
 /**
  * \brief           Read variable from EEPROM emulation
  *
- * \param[in]       address: virtual address of data to be read
- * \param[in]       value: pointer to output value
+ * \param[in]       virtAddress: virtual address of data to be read
+ * \param[out]      value: pointer to output value
  *
- * \return          EEPROM_SUCCESS if read was succesful, EEPROM_NO_VALID_PAGE if no valid page was found, EEPROM_ERROR otherwise
+ * \return          EEPROM_SUCCESS if read was successful, EEPROM_NO_VALID_PAGE if no valid page was found, EEPROM_ERROR otherwise
  */
 EEPROM_retStatus_t EEPROM_ReadVariable(uint16_t virtAddress, uint16_t* value);
 
@@ -77,7 +77,7 @@ EEPROM_retStatus_t EEPROM_ReadVariable(uint16_t virtAddress, uint16_t* value);
  * \param[in]       virtAddress: virtual address of data to be written
  * \param[in]       value: value to be written
  *
- * \return          EEPROM_SUCCESS if write was succesful, EEPROM_NO_VALID_PAGE if no valid page was found, EEPROM_ERROR otherwise
+ * \return          EEPROM_SUCCESS if write was successful, EEPROM_NO_VALID_PAGE if no valid page was found, EEPROM_ERROR otherwise
  */
 EEPROM_retStatus_t EEPROM_WriteVariable(uint16_t virtAddress, uint16_t value);
 
